@@ -1,0 +1,26 @@
+<div id="equipements">
+
+<!--{{sorties}}-->
+
+    <ul>
+        <li ng-click="selecteqp(0)">
+            <!--<span>{{eqpstat[0]}}</span>-->
+            <img ng-if="eqpstat[0] == 1" src="images/icons/four.png" alt=""/>
+            <img ng-if="eqpstat[0] == 0" src="images/icons/four_off.png" alt=""/>
+            {{sorties.response.led0 }}
+
+
+        </li>
+
+        <li ng-repeat="prise in setting.zwave.prises" ng-click="selectplug(prise.id)">
+            <h3>{{prise.name}}</h3>
+            <!--<span>{{eqpstat[prise.id]}}</span>-->
+
+        </li>
+
+
+
+    </ul>
+
+
+</div>
