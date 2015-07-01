@@ -2,6 +2,8 @@
     <ul class="nav nav-tabs">
         <li class="nav active"><a href="#serveurs" data-toggle="tab">IP des serveurs</a></li>
         <li class="nav"><a href="#zwave" data-toggle="tab">Configuration Zwave</a></li>
+        <li class="nav"><a href="#batteries" data-toggle="tab">Configuration Batteries</a></li>
+
         <li class="nav"><a href="#geolocalisation" data-toggle="tab">Geolocalisation</a></li>
     </ul>
 
@@ -59,4 +61,36 @@
 
 
         </div>
+
+        <div class="tab-pane fade" id="batteries">
+
+            <span><b>MARQUE : </b></span>
+            <input ng-model="setting.batteries.marque" type="text" class="form-control" placeholder="MARQUE"> <br/>
+            <span><b>Nombre de battries : </b> </span><br/>
+            <input ng-model="setting.batteries.nbrbat" type="number" class="form-control" placeholder="Nombre de battries">
+
+            <span><b>AMP BATTERIE : </b></span><br/>
+            <input ng-model="setting.batteries.ampbat" type="number" class="form-control" placeholder="AMP BATTERIE">
+
+            <span><b>VOLT PARK : </b></span><br/>
+            <input ng-model="setting.batteries.voltbat" type="number" class="form-control" placeholder="AMP BATTERIE">
+
+            <span><b> DATE MISE EN SERVICE : </b></span><br/>
+            <input ng-model="setting.batteries.date" type="text" class="form-control"  placeholder="DATE MISE EN SERVICE">
+
+            <span><b>AMP EN {{setting.batteries.voltbat}}V : {{ ((setting.batteries.nbrbat * setting.batteries.ampbat )/4) }} A</b></span><br/>
+
+
+            <span><b>KWH 100% DC :  {{ (((setting.batteries.nbrbat * setting.batteries.ampbat )/4) * setting.batteries.voltbat) /1000 }} </b></span><br/>
+
+            <span><b>KWH 100% AC :  {{ ((((setting.batteries.nbrbat * setting.batteries.ampbat )/4) * setting.batteries.voltbat) /1000)/1.2 }} </b></span><br/>
+
+
+            <!--<span class="input-group-btn">-->
+            <!--<button ng-click="IpSetting(setting)" class="btn btn-default" type="button">OK!</button>-->
+
+
+        </div><!-- /input-group -->
+
+
     </div>

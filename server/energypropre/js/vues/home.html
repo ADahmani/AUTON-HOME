@@ -1,0 +1,93 @@
+<!--<div class="row">-->
+    <!--<h3>This is the header</h3>-->
+<!--</div>-->
+<!--<div class="sidebar">-->
+    <!--<div class="small-4 columns" ng-controller="SidebarCtrl">-->
+        <!--<ul>-->
+            <!--<li ng-repeat="page in content"> <a ng-click="setPage(page)">goto {{page}}</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="small-8 columns content">-->
+        <!--<div ui-view></div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+
+<div id="sidebar-wrapper" ng-controller="SidebarCtrl">
+
+    <img src="images/mainlogo.png"/>
+
+    <ul class="sidebar-nav">
+        <li ng-repeat="page in content">
+            <a ng-click="setPage(page)" class="tooltip-tip ajax-load tooltipster-disable" href="#">
+                <i class="icon-window"></i>
+                <span style="display: inline-block; float: none;">{{page}}</span>
+
+            </a>
+        </li>
+
+    </ul>
+</div>
+<!-- /#sidebar-wrapper -->
+
+        <div ng-controller="homeController">
+<div id="nt-title-container" class="navbar-left running-text visible-lg">
+    <ul class="date-top">
+        <li class="entypo-calendar" style="margin-right:5px"></li>
+
+        <li id="Date">{{AssignedDate.now() | date:'dd/mm/yyyy | HH : mm : ss'}}</li>
+
+
+    </ul>
+    <ul id="nt-title" style="height: 18px; overflow: hidden;">
+
+        <li style="margin-top: 0px;">
+            <weather-icon cloudiness="{{ weather.clouds }}"></weather-icon> | <span style="font-weight:bold">{{ weather.temp.current | temp:1 }}</span>
+        </li>
+        <!--<li style="margin-top: 0px;">-->
+        <!--<span style="color:#0074cc">{{ weather.temp.min | temp:1 }}</span> |-->
+        <!--<span style="font-weight:bold">{{ weather.temp.current | temp:1 }}</span> | <span style="color:#cd1c1b">{{ weather.temp.max | temp:1 }}</span>-->
+        <!--</li>-->
+    </ul>
+</div>
+
+<div id="page-content-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="mybox col-lg-12" ui-view>
+
+                <div class="col-sm-6">
+                    <div class="weather-wrap">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="weather-icon">
+                                    <weather-iconbig cloudinessbig="{{ weather.clouds }}"></weather-iconbig>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="weather-text">
+                                    <h2>{{ weather.name }}
+                                        <br><i>{{ weather.description }}</i>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="weather-text">
+                                    <h3><i class="wi-thermometer"></i>{{weather.temp.current  | temp:1 }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+        </div>

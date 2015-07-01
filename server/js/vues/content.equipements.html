@@ -1,0 +1,31 @@
+<div id="equipements">
+
+<!--{{sorties}}-->
+<!--{{//sorties.ipx.OUT1}}-->
+    <ul>
+        <li ng-click="selecteqp(0)">
+            <!--<span>{{eqpstat[0]}}</span>-->
+            <img ng-if="sorties.ipx.OUT1 == 1" src="images/icons/four.png" alt=""/>
+            <img ng-if="sorties.ipx.OUT1  == 0" src="images/icons/four_off.png" alt=""/>
+
+        </li>
+
+        <li ng-repeat="prise in setting.zwave.prises" ng-click="selectplug(prise.id)">
+            <h3>{{prise.name}}</h3>
+            <h6>Consomation: <b>{{prise.id / 4}} Watts</b></h6>
+            <h6>Voltage: <b>{{prise.id * 4}} Volts</b></h6>
+            <h6>Amperage: <b>{{prise.id / 2}} Amps</b></h6>
+            <br/>
+            <h6>ETAT: <b>{{eqpstat[prise.id]}}</b></h6>
+
+
+            <!--<span>{{eqpstat[prise.id]}}</span>-->
+
+        </li>
+
+
+
+    </ul>
+
+
+</div>

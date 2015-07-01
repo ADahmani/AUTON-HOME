@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('ghita', ['ui.router','ngStorage']);
+var app = angular.module('ghita', ['ui.router','ngStorage','highcharts-ng']);
 app.config(['$stateProvider', function ($stateProvider) {
    // $stateProvider.when('/home', {templateUrl: 'js/vues/home.html', controller: 'homeController'});
   //  $stateProvider.when('/login', {templateUrl: 'js/vues/login.html', controller: 'loginController'});
@@ -13,9 +13,9 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: '/',
             templateUrl: 'js/vues/home.html'
         },
-        equipements = {
-            name: 'equipements',
-            url: 'equipements',
+        INTERFACE = {
+            name: 'INTERFACE',
+            url: 'INTERFACE',
             parent: home,
             templateUrl: 'js/vues/content.equipements.html'
         },
@@ -26,7 +26,7 @@ app.config(['$stateProvider', function ($stateProvider) {
             templateUrl: 'js/vues/content.configuration.html'
         };
     $stateProvider.state(home);
-    $stateProvider.state(equipements);;
+    $stateProvider.state(INTERFACE);
     $stateProvider.state(configuration);
 
 }]);
@@ -43,8 +43,8 @@ app.run(function ($rootScope,$interval, $location,$state,$localStorage,weatherSe
     if(localStorage.getItem("ngStorage-setting") === null ){
         console.log("should transit to the configuration menu! ");
         $state.transitionTo('configuration');
-        var setting = {"ipx":"192.168.1.1",
-            "nas":"192.168.1.20",
+        var setting = {"ipx":"192.168.1.104",
+            "nas":"192.168.1.100",
             "edf":"192.168.1.30",
             "zwave":{
                 "ip":"192.168.1.251",
@@ -58,12 +58,21 @@ app.run(function ($rootScope,$interval, $location,$state,$localStorage,weatherSe
                     //seche-linge
                     "prise3":{"id":"15", "name":"Seche-linge"}
                 }
+            },
+            "batteries":{
+                "marque":"inconnu",
+                "nbrbat" :0,
+                "ampbat" : 0,
+                "voltbat" :0,
+                "date" : '00-00-0000'
+
+
             }
         };
         $localStorage.setting = setting;
 
     }else{
-        $state.transitionTo('home');
+        $state.transitionTo('INTERFACE');
         console.log("it should not transite to the configuration menu")
     }
 

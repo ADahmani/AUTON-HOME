@@ -1,26 +1,709 @@
 <div id="equipements">
 
 <!--{{sorties}}-->
+<!--{{madata.state.IPX.OUT.OUT1}}-->
 
-    <ul>
-        <li ng-click="selecteqp(0)">
-            <!--<span>{{eqpstat[0]}}</span>-->
-            <img ng-if="eqpstat[0] == 1" src="images/icons/four.png" alt=""/>
-            <img ng-if="eqpstat[0] == 0" src="images/icons/four_off.png" alt=""/>
-            {{sorties.response.led0 }}
+    <div class="row">
 
 
-        </li>
+        <ul class="nav nav-tabs">
+            <li class="nav bluebg active"><a href="#Consomation" data-toggle="tab">CONSOMMATION</a></li>
+            <li class="nav greenbg"><a href="#prod" data-toggle="tab">PRODUCTION</a></li>
+            <li class="nav yellowbg"><a href="#batteries" data-toggle="tab">BATTERIES</a></li>
+            <li class="nav violetbg"><a href="#edf" data-toggle="tab">CONSO EDF / REVENTE ERDF</a></li>
+            <li class="nav grisbg"><a href="#graph" data-toggle="tab">GRAPHIQUES</a></li>
+        </ul>
 
-        <li ng-repeat="prise in setting.zwave.prises" ng-click="selectplug(prise.id)">
-            <h3>{{prise.name}}</h3>
-            <!--<span>{{eqpstat[prise.id]}}</span>-->
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="Consomation">
 
-        </li>
+                <div class="row">
+
+
+                        <div id="whitebox">
+
+                            <div class="panel panel-primary">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading bluebg">CONSO TABLEAU MAISON</div>
+
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+                                        <th>POSTE</th>
+                                        <th>W</th>
+                                        <th>KWH DU JOUR {{curyear}}</th>
+                                        <th>KWH DU JOUR {{curyear -1}}</th>
+                                        <th>KWH SEMAINE {{curyear}} </th>
+                                        <th>KWH SEMAINE {{curyear -1}} </th>
+                                        <th>KWH DU MOIS {{curyear}} </th>
+                                        <th>KWH DU MOIS {{curyear -1}}</th>
+                                        <th>KWH ANNEE {{curyear}} </th>
+                                        <th>KWH ANNEE {{curyear -1}} </th>
+                                        <th>KWH ANNEE {{curyear -2}} </th>
+                                        <th>ON/OFF</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr>
+                                        <th scope="row">{{setting.zwave.prises.prise1.name}}</th>
+                                        <td>{{madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise1.id].W}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwj}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwj1}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kws}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kws1}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwm}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwm1}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwa}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwa1}}</td>
+                                        <td>{{madata.state.CONSO.lavelinge.kwa2}}</td>
+                                        <td>
+                    <span class="toggleicon" ng-click="selectplug(setting.zwave.prises.prise1.id,madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise1.id].stat)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise1.id].stat === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise1.id].stat === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">{{setting.zwave.prises.prise2.name}}</th>
+                                        <td>{{madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise2.id].W}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwj}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwj1}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kws}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kws1}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwm}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwm1}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwa}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwa1}}</td>
+                                        <td>{{madata.state.CONSO.lavevess.kwa2}}</td>
+                                        <td>
+                      <span class="toggleicon" ng-click="selectplug(setting.zwave.prises.prise2.id,madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise2.id].stat)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise2.id].stat === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise2.id].stat === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Chauffe-eau</th>
+                                        <td>{{madata.state.CONSO.chauffeau.W}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwj}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwj1}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kws}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kws1}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwm}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwm1}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwa}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwa1}}</td>
+                                        <td>{{madata.state.CONSO.chauffeau.kwa2}}</td>
+
+                                        <td>
+                    <span class="toggleicon" ng-click="selecteqp(0)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.state.IPX.OUT.OUT1 === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.state.IPX.OUT.OUT1 === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Chauffage</th>
+                                        <td>{{madata.state.CONSO.chauffage.W}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwj}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwj1}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kws}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kws1}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwm}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwm1}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwa}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwa1}}</td>
+                                        <td>{{madata.state.CONSO.chauffage.kwa2}}</td>
+                                        <td>
+                    <span class="toggleicon" ng-click="selecteqp(1)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.state.IPX.OUT.OUT2 === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.state.IPX.OUT.OUT2 === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Four</th>
+                                        <td>{{madata.state.CONSO.four.W}}</td>
+                                        <td>{{madata.state.CONSO.four.kwj}}</td>
+                                        <td>{{madata.state.CONSO.four.kwj1}}</td>
+                                        <td>{{madata.state.CONSO.four.kws}}</td>
+                                        <td>{{madata.state.CONSO.four.kws1}}</td>
+                                        <td>{{madata.state.CONSO.four.kwm}}</td>
+                                        <td>{{madata.state.CONSO.four.kwm1}}</td>
+                                        <td>{{madata.state.CONSO.four.kwa}}</td>
+                                        <td>{{madata.state.CONSO.four.kwa1}}</td>
+                                        <td>{{madata.state.CONSO.four.kwa2}}</td>
+                                        <td>
+                    <span class="toggleicon" ng-click="selecteqp(2)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.state.IPX.OUT.OUT3 === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.state.IPX.OUT.OUT3 === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">{{setting.zwave.prises.prise3.name}}</th>
+                                        <td>{{madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise3.id].W}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwj}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwj1}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kws}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kws1}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwm}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwm1}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwa}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwa1}}</td>
+                                        <td>{{madata.state.CONSO.sechelinge.kwa2}}</td>
+                                        <td>
+                        <span class="toggleicon" ng-click="selectplug(setting.zwave.prises.prise3.id,madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise3.id].stat)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise3.id].stat === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.realtime.ZWAVE.PRISE[setting.zwave.prises.prise3.id].stat === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Autre</th>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>
+                    <span class="toggleicon" ng-click="selecteqp(4)">
+                        <!--<span>{{eqpstat[0]}}</span>-->
+                        <img ng-if="madata.state.IPX.OUT.OUT5 === 1" src="images/on.png" alt=""/>
+                        <img ng-if="madata.state.IPX.OUT.OUT5 === 0" src="images/off.png" alt=""/>
+
+                    </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">remise à 0</th>
+                                        <td></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('j')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('j1')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('s')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('s1')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('m')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('m1')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('a')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('a1')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td><button type="button" class="btn btn-default" ng-click="reset('a2')">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        </button></td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
 
 
 
-    </ul>
+
+
+
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="prod">
+                <div id="whitebox">
+                <div class="panel panel-primary">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading greenbg">ONDULEURS</div>
+
+                    <table class="table table-bordered" style="text-align: center;">
+                    <thead>
+                    <tr>
+
+                        <th> </th>
+                        <th>VOLT </th>
+                        <th>AMP </th>
+                        <th>WATT DC </th>
+                        <th>WATT AC </th>
+                        <th>KWH DU JOUR {{curyear}}</th>
+                        <th>KWH DU JOUR {{curyear -1}}</th>
+                        <th>KWH SEMAINE {{curyear}} </th>
+                        <th>KWH SEMAINE {{curyear -1}} </th>
+                        <th>KWH DU MOIS {{curyear}} </th>
+                        <th>KWH DU MOIS {{curyear -1}}</th>
+                        <th>KWH ANNEE {{curyear}} </th>
+                        <th>KWH ANNEE {{curyear -1}} </th>
+                        <th>KWH ANNEE {{curyear -2}} </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>ONDULEUR 1</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{{madata.state.CONSO.ond1.W * 1.2}}</td>
+                        <td>{{madata.state.CONSO.ond1.W}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwj}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwj1}}</td>
+                        <td>{{madata.state.CONSO.ond1.kws}}</td>
+                        <td>{{madata.state.CONSO.ond1.kws1}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwm}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwm1}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwa}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwa1}}</td>
+                        <td>{{madata.state.CONSO.ond1.kwa2}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <th>ONDULEUR 2</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{{madata.state.CONSO.ond2.W * 1.2}}</td>
+                        <td>{{madata.state.CONSO.ond2.W}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwj}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwj1}}</td>
+                        <td>{{madata.state.CONSO.ond2.kws}}</td>
+                        <td>{{madata.state.CONSO.ond2.kws1}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwm}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwm1}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwa}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwa1}}</td>
+                        <td>{{madata.state.CONSO.ond2.kwa2}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+</div>
+                </div>
+
+                <div id="whitebox">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading greenbg">CHARGEUR BLUE SOLAR</div>
+
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                            <tr>
+
+
+                                <th>VOLT </th>
+                                <th>AMP </th>
+                                <th>WATT DC </th>
+                                <th>KWH DU JOUR {{curyear}}</th>
+                                <th>KWH DU JOUR {{curyear -1}}</th>
+                                <th>KWH SEMAINE {{curyear}} </th>
+                                <th>KWH SEMAINE {{curyear -1}} </th>
+                                <th>KWH DU MOIS {{curyear}} </th>
+                                <th>KWH DU MOIS {{curyear -1}}</th>
+                                <th>KWH ANNEE {{curyear}} </th>
+                                <th>KWH ANNEE {{curyear -1}} </th>
+                                <th>KWH ANNEE {{curyear -2}} </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+
+                                <td>0</td>
+                                <td>0</td>
+                                <td>{{madata.state.CONSO.chargeBS.W * 1.2}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwj}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwj1}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kws}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kws1}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwm}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwm1}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwa}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwa1}}</td>
+                                <td>{{madata.state.CONSO.chargeBS.kwa2}}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="tab-pane fade" id="batteries">
+
+
+
+                <div id="whitebox">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading yellowbg">BATTERIES</div>
+
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                            <th colspan="8">INFORMATION SUR LES BATTERIES INSTALLEES</th>
+                            <tr>
+
+                                <!--<th>INFORMATION SUR LES BATTERIES INSTALLEES</th>-->
+                                <th>MARQUE BATTERIE</th>
+                                <th>NOMBRE BATTERIE</th>
+                                <th>AMP BATTERIE</th>
+                                <th>VOLTAGE DU PARK </th>
+                                <th>AMP EN 48 VOLT</th>
+                                <th>KWH 100% DC</th>
+                                <th>KWH 100% AC</th>
+                                <th>MISE EN SERVICE </th>
+
+
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <!--<th></th>-->
+                                <td>{{setting.batteries.marque}}</td>
+                                <td>{{setting.batteries.nbrbat}}</td>
+                                <td>{{setting.batteries.ampbat}}</td>
+                                <td>{{setting.batteries.voltbat}}</td>
+                                <td>{{ ((setting.batteries.nbrbat * setting.batteries.ampbat )/4) }} A</td>
+                                <td>{{ (((setting.batteries.nbrbat * setting.batteries.ampbat )/4) * setting.batteries.voltbat) /1000 }}</td>
+                                <td>{{((((setting.batteries.nbrbat * setting.batteries.ampbat )/4) * setting.batteries.voltbat) /1000)/1.2 }}</td>
+                                <td>{{setting.batteries.date}}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                            <th colspan="8">CONSOMMATION JOURNALIERE DANS LES BATTERIES</th>
+                            <tr>
+
+                                <!--<th>INFORMATION SUR LES BATTERIES INSTALLEES</th>-->
+                                <th>HEURE LEVEE SOLEIL</th>
+                                <th>HEURE COUCHEE SOLEIL</th>
+                                <th>AMP BATTERIE</th>
+                                <th>CONSO KWH LE JOUR </th>
+                                <th>CONSO KWH LA NUIT</th>
+                                <th>CONSO TOTAL KWH SUR 24H</th>
+                                <th>CONSO TOTAL KWH SUR 1 SEMAINE</th>
+
+
+
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <!--<th></th>-->
+                                <td>{{madata.batteries.sr}}</th>
+                                <td>{{madata.batteries.ss}}</th>
+                                <td>{{0}}</td>
+                                <td>{{madata.batteries.jour}}</td>
+                                <td>{{madata.batteries.nuit}}</td>
+                                <td>{{madata.batteries.kwhjour}}</td>
+                                <td>{{madata.batteries.week}}</td>
+
+                               
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                            <th colspan="8">INFORMATION INSTANTANNEE DES BATTERIES</th>
+                            <tr>
+
+                                <!--<th>INFORMATION INSTANTANNEE DES BATTERIES</th>-->
+                                <th>VOLT</th>
+                                <th>AMP</th>
+                                <th>WATT</th>
+                                <th>KWH</th>
+                                <th>% DE CHARGE</th>
+                                <th>% DE DECHARGE</th>
+                                <th>KWH RESTANT AC</th>
+                                <th>TEMPERATURE </th>
+
+
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <!--<th></th>-->
+                                <td>{{0}}</td>
+                                <td>{{0}}</td>
+                                <td>{{madata.batteries.W}}</td>
+                                <td>{{madata.batteries.kwhtotal}}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="edf">
+                <div id="whitebox">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading violetbg">CONSOMMATION EDF</div>
+
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                            <tr>
+
+
+                                <th>VOLT </th>
+                                <th>AMP </th>
+                                <th>WATT INSTANTANNEE </th>
+                                <th>KWH DU JOUR {{curyear}}</th>
+                                <th>KWH DU JOUR {{curyear -1}}</th>
+                                <th>KWH SEMAINE {{curyear}} </th>
+                                <th>KWH SEMAINE {{curyear -1}} </th>
+                                <th>KWH DU MOIS {{curyear}} </th>
+                                <th>KWH DU MOIS {{curyear -1}}</th>
+                                <th>KWH ANNEE {{curyear}} </th>
+                                <th>KWH ANNEE {{curyear -1}} </th>
+                                <th>KWH ANNEE {{curyear -2}} </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div id="whitebox">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading violetbg">SURPLUS REVENTE ERDF</div>
+
+                        <table class="table table-bordered" style="text-align: center;">
+                            <thead>
+                            <tr>
+
+
+                                <th>VOLT </th>
+                                <th>AMP </th>
+                                <th>WATT INSTANTANNEE </th>
+                                <th>KWH DU JOUR {{curyear}}</th>
+                                <th>KWH DU JOUR {{curyear -1}}</th>
+                                <th>KWH SEMAINE {{curyear}} </th>
+                                <th>KWH SEMAINE {{curyear -1}} </th>
+                                <th>KWH DU MOIS {{curyear}} </th>
+                                <th>KWH DU MOIS {{curyear -1}}</th>
+                                <th>KWH ANNEE {{curyear}} </th>
+                                <th>KWH ANNEE {{curyear -1}} </th>
+                                <th>KWH ANNEE {{curyear -2}} </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="tab-pane fade" id="graph">
+
+                <div class="row">
+
+
+                    <div id="whitebox">
+
+                        <div class="panel panel-primary">
+                            <!-- Default panel contents -->
+                            <!--<div class="panel-heading bluebg">CONSO TABLEAU MAISON</div>-->
+                            <button ng-click="loadgraph()" style="margin:10px" type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> {{charge}}
+                            </button>
+                            <highchart style="width: 100%" id="chart1" config="chartConfig"></highchart>
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div id="whitebox">
+                <div class="panel panel-primary">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading synthbg">SYNTHESE CONSOMMATION ET PRODUCTIONS JOURNALIERE</div>
+
+                    <table class="table table-bordered" style="text-align: center;">
+                        <thead>
+                        <tr>
+
+
+                            <th></th>
+                            <th>EN WATT </th>
+                            <th>EN KWH </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+
+                            <td>CONSOMMATION TABLEAU MAISON</td>
+                            <td>0</td>
+                            <td>0</td>
+
+
+                        </tr>
+                        <tr>
+
+                            <td>PRODUCTION PANEAUX PHOTOVOLTAIQUE</td>
+                            <td>0</td>
+                            <td>0</td>
+
+
+                        </tr>
+                        <tr>
+
+                            <td>COMPLEMENTS DES BATTERIES (SI BESOIN)</td>
+                            <td>0</td>
+                            <td>0</td>
+
+
+                        </tr>
+                        <tr>
+
+                            <td>CONSOMMATION EDF (SI BESOIN)</td>
+                            <td>0</td>
+                            <td>0</td>
+
+
+                        </tr>
+                        <tr>
+
+                            <td>REVENTE DU SURPLUS A ERDF</td>
+                            <td>0</td>
+                            <td>0</td>
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
 
 
 </div>

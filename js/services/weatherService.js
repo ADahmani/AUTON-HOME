@@ -1,12 +1,12 @@
 /**
- * Created by ADahmani on 01/04/2015.
- */
+* Created by ADahmani on 01/04/2015.
+*/
 'use strict';
 
 app.factory('weatherService', function($http) {
     return {
         getWeather: function(city) {
-            var weather = { temp: {}, clouds: null, name:"", description:"" };
+            var weather = { temp: {},sun: {}, clouds: null, name:"", description:"" };
             $http.jsonp('http://api.openweathermap.org/data/2.5/weather?q=' + city + ',FR&units=metric&&lang=fr&callback=JSON_CALLBACK').success(function(data) {
                 if (data) {
                     if (data.main) {
@@ -14,6 +14,8 @@ app.factory('weatherService', function($http) {
                         weather.temp.min = data.main.temp_min;
                         weather.temp.max = data.main.temp_max;
                     }
+                    weather.sun.set = data.sys.set;
+                    weather.sun.rise = data.sys.rise;
                     weather.clouds = data.clouds ? data.clouds.all : undefined;
                     weather.name = data.name;
                     weather.description = data.weather[0].description;
